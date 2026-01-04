@@ -1,0 +1,18 @@
+# Backend (Java/IntelliJ)
+backend/target/
+backend/.idea/
+backend/*.iml
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.env
+
+# Frontend (Node.js típicamente)
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env.local
+
+# General
+.DS_Store
+*.log
