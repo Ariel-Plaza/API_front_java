@@ -14,8 +14,10 @@ public interface SerieRepository extends JpaRepository<Serie,Long> {
     // USO Spring Data JPA
     //    busca titulo que contenga parte y ignora mayusculas
     Optional<Serie> findByTituloContainsIgnoreCase(String nombreSerie);
+
     //query para top5
     List<Serie> findTop5ByOrderByEvaluacionDesc();
+
     //busqueda por categoria
     List<Serie> findByGenero(Categoria categoria);
 
@@ -31,6 +33,9 @@ public interface SerieRepository extends JpaRepository<Serie,Long> {
     @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE e.titulo ILIKE %:nombreEpisodio%")
     List<Episodio> episodiosPorNombre(String nombreEpisodio);
 
-    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s = :serie ORDER BY e.evaluacion DESC LIMIT 5 ")
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s = :serie ORDER BY e.evaluacion DESC LIMIT 6 ")
     List<Episodio> top5Episodios(Serie serie);
+
+    @Query("SELECT s FROM Serie s " + "JOIN s.episodios e " + "GROUP BY s " + "ORDER BY MAX(e.fechaDeLanzamiento) DESC LIMIT 9")
+    List<Serie> lanzamientosMasRecientes();
 }
